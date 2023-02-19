@@ -10,16 +10,17 @@
     "moment-timezone": "^0.5.40",
     "mongoose": "^6.9.2",
     "nodemailer": "^6.9.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.1",
     "validator": "^13.9.0"
   },
   "name": "hms_api",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "nodemon index.js",
-    "dev" : "node index.js"
+    "start": "nodemon index.js",
+    "dev": "node index.js"
   },
   "author": "",
   "license": "ISC",

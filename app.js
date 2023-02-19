@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const errorMiddleware = require("./middleware/error");
 const cors = require("cors");
+const swaggerUI = require('swagger-ui-express');
+const swaggerDoc = require('./swagger.json')
 
 // middlewares
 app.use(express.json());
@@ -27,5 +29,6 @@ const posts = require("./routes/postRoutes");
 app.use("/api/v1", users);
 app.use("/api/v1",entries);
 app.use("/api/v1",posts);
+app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerDoc));
 
 module.exports = app;
