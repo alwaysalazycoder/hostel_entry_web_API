@@ -13,7 +13,7 @@
     "basePath": "/",
     "tags": [
         {
-            "name": "Login",
+            "name": "Logout",
             "description": "Everything about your Login",
             "externalDocs": {
                 "description": "Find out more",
