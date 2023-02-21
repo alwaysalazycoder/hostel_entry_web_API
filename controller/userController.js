@@ -13,7 +13,7 @@ const Admin = require("../models/adminModel");
 // 🔥 Register user
 exports.registerUser = catchAsyncError(async (req, res, next) => {
 
-    const { name, email, password, enrollment_no, room_no, floor ,phoneNo} = req.body;
+    const { name, email, password, enrollment_no, room_no, floor, phoneNo } = req.body;
 
     const user = await User.create({
         name,
@@ -29,7 +29,7 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
         ID_card: {
             public_id: "sample_id",
             url: "sample_url"
-        },phoneNo,
+        }, phoneNo,
 
     });
 
@@ -91,7 +91,7 @@ exports.getUserDetails = catchAsyncError(async (req, res, next) => {
 exports.updateUser = catchAsyncError(async (req, res, next) => {
 
     const { enrollment_no } = req.body;
-    const { name, room_no,phoneNo } = req.body;
+    const { name, room_no, phoneNo } = req.body;
 
     const user = await User.findOne({ enrollment_no });
 
@@ -149,7 +149,14 @@ exports.registerAdmin = catchAsyncError(async (req, res, next) => {
 
     const admin = await Admin.create({
         name, email, password, role,
-    })
+    });
+
+    if (!admin) {
+        res.status(404).json({
+            success: false,
+            message: "Error occured user may already exists..."
+        });
+    }
 
     const token = admin.getJWTToken();
     res.status(200).json({

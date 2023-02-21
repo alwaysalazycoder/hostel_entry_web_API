@@ -32,7 +32,7 @@ router.route("/update/user").get(updateUser);
 
 // admin routes
 router.route("/admin/register").post(registerAdmin);
-router.route("/admin/login").post(loginAdmin);
+router.route("/admin/login").post(isAuthenticatedUser,loginAdmin);
 router.route("/admin/logout").get(logOutAdmin);
 router.route("/admin/password/forgot").post(forgotPassword("admin"));
 router.route("/admin/password/reset/:token").put(resetPassword("admin"));
