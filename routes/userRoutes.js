@@ -36,7 +36,7 @@ router.route("/admin/login").post(loginAdmin);
 router.route("/admin/logout").get(logOutAdmin);
 router.route("/admin/password/forgot").post(forgotPassword("admin"));
 router.route("/admin/password/reset/:token").put(resetPassword("admin"));
-router.route("/admin/users").get(isAuthenticatedUser,isAuthorisedRole,getAllUsers);
+router.route("/admin/users").get(getAllUsers);
 router.route("/admin/delete").delete(isAuthenticatedUser,isAuthorisedRole,deleteUser)
 
 
