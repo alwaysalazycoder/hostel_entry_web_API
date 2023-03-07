@@ -3,6 +3,7 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const crypto = require("crypto");
+const cloudinary = require('cloudinary');
 
 const User = require("../models/userModel");
 const Admin = require("../models/adminModel");
@@ -13,7 +14,31 @@ const Admin = require("../models/adminModel");
 // 🔥 Register user
 exports.registerUser = catchAsyncError(async (req, res, next) => {
 
+    let myCloud;
+
+    try {
+        myCloud = await cloudinary.v2.uploader.upload(req.body.photoURL, {
+            folder: "HMS",
+            resource_type: "auto",
+        })
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+    if (!myCloud) {
+        res.status(500).json({
+            success: false,
+            message: "Cloudinary type error"
+        })
+    }
+
+
+
+
     const { name, email, password, enrollment_no, room_no, floor, phoneNo } = req.body;
+
+
 
     const user = await User.create({
         name,
@@ -93,6 +118,7 @@ exports.updateUser = catchAsyncError(async (req, res, next) => {
     const { enrollment_no } = req.body;
     const { name, room_no, phoneNo } = req.body;
 
+
     const user = await User.findOne({ enrollment_no });
 
     user.name = name;
@@ -104,7 +130,8 @@ exports.updateUser = catchAsyncError(async (req, res, next) => {
     res.status(200).json({
         success: true,
         user,
-        name, email,
+        name,
+        // email,
         phoneNo,
 
     })
