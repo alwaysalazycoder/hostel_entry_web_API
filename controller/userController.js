@@ -48,8 +48,8 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
         room_no,
         floor,
         profile: {
-            public_id: "sample_id",
-            url: "sample_url"
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
         },
         ID_card: {
             public_id: "sample_id",
